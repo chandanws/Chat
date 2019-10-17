@@ -1,0 +1,47 @@
+{
+  "name": "chatfront",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service serve --mode test",
+    "lint": "vue-cli-service lint",
+    "build:test": "vue-cli-service build --mode test",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "element-ui": "^2.4.5",
+    "vchat-regcode": "0.0.3",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-plugin-unit-mocha": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-component": "^1.1.1",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.1.2",
+    "compression-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.9.0",
+    "normalize.css": "^8.0.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue-cli-plugin-element": "^1.0.1",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10"
+  }
+}

@@ -1,0 +1,111 @@
+html,
+body,
+#app,
+.wrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  height: 10px;
+  width: 8px;
+  background: hsla(220,4%,58%,.1);
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    border-radius:4px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius:4px;
+  background-color: hsla(220,4%,58%,.3);
+  transition: background-color .3s;
+  &:hover {
+    background-color: hsla(220,4%,58%,.5);
+  }
+}
+
+div:focus {
+  outline: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  font-size: 5px;
+  color: #169BD5;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a:focus,
+a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.text{
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: distribute;
+  text-align-last: initial;
+}
+
+input {
+  height: $h-input;
+  width: $w-input;
+  border: .06rem solid $clr-border;
+  border-radius: 5px;
+  font-size: $font-size-input;
+  padding-inline-start: .6rem;
+  color: $clr-gray;
+}
+
+::-webkit-input-placeholder {
+  color: $clr-gray;
+  font-size: $font-size-input;
+}
+//这个是不是默认的？
+input::-ms-clear {
+  display: inline;
+}
+input::-ms-reveal {
+  display: inline;
+}
+
+button {
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: .4em .8em;
+  background: $clr-button linear-gradient(hsla(0, 0%, 100%, .2), transparent);
+  border-radius: .6em;
+}
+
+textarea {
+  border-radius: 4px;
+  border: .06rem solid $clr-border;
+  padding-inline-start: .6rem;
+  height: 10rem;
+  line-height: 2rem;
+}
+
+li {
+  list-style-type:none;
+}
+
+.active {
+  color: #169BD5;
+  border: none;
+}
