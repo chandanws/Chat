@@ -1,10 +1,15 @@
 /**
  * 初始化数据用户和表情包
  */
-
 const db = require('../utils/database.js')
 const fs = require('fs')
 const path = require('path')
+const crypto = require('crypto')
+
+const md5 = password => {
+  let md5 = crypto.createHash('md5')
+  return md5.update(password).digest('hex')
+}
 
 const users = db.model("users", {
   account: {
@@ -17,7 +22,8 @@ const users = db.model("users", {
     unique: true
   },
   avatar: {
-    type: String
+    type: String,
+    default: '/img/avatar.png'
   },
   signature: {
     type: String,
@@ -32,8 +38,8 @@ const users = db.model("users", {
     default: ''
   },
   sex: {
-    type: String,
-    default: '3'
+    type: Number,
+    default: 3
   }, // 0 男 1 女 3 保密
   projectTheme: {
     type: String,
@@ -47,8 +53,110 @@ const users = db.model("users", {
     type: Date,
     default: Date.now()
   },
-  conversationsList: Array
+  conversationsList: Array // 哪个列表？？会话列表
 })
+
+const groups = db.model("groups", {
+  account: {
+    type: String,
+    unique: true
+  },
+  holderAccount: {
+    type: String,
+  },
+  avatar: {
+    type: String,
+    default: '/img/avatar.png'
+  },
+  signature: {
+    type: String,
+    default: '介绍一下你们的小天地吧~'
+  },
+  code: String,
+  desc: { // 1 降序
+    type: Number,
+    default: 1
+  },
+  userNum: {
+    type: Number,
+    default: 1
+  },
+  createDate: {
+    type: Date,
+    default: Date.now()
+  }
+})
+
+const groupUserSchema = new db.Schema({
+  groupId: {
+    type: db.Schema.ObjectId,
+    ref: 'groups'
+  },
+  userId: { // 用户的id
+    type: db.Schema.ObjectId,
+    ref: 'users'
+  },
+  userAccount: { // 用户的账号
+    type: String
+  },
+  manager: {
+    type: Number,
+    default: 0
+  },
+  holder: {
+    type: Number,
+    default: 0
+  },
+  card: String
+})
+
+
+const initGroup = (callback) => {
+  const group = new groups({
+    account: 'LC-Group',
+    signature: 'LC官方群',
+    code: 999999,
+    holderAccount: 'LC'
+  })
+
+  group.save().then((res) => {
+    console.log('初始化成功')
+    console.log(res)
+    callback(res)
+  })
+}
+
+groupUserSchema.statics = {
+  findGroupByUserAccount(userAccount, callback) {
+    return this.find({
+      userAccount: userAccount
+    }).populate('groupId').exec(callback)
+  },
+  findGroupUsersByGroupId(groupId, callback) {
+    return this.find({
+      groupId: groupId
+    }).populate({
+      path: 'userId',
+      select: 'signature avatar account createDate code'
+    }).exec(callback)
+  }
+}
+
+const groupUser = db.model("groupUser", groupUserSchema)
+
+const initGroupUser = (callback) =>{
+  let groupuser = groupUser({
+    groupId: '5db7d3cb763f02137c67748b',
+    userId: '5db7d3ca763f02137c6768c6',
+    userAccount: 'LC'
+  })
+
+  groupuser.save().then((res) => {
+    console.log('初始化成功')
+    console.log(res)
+    callback(res)
+  })
+}
 
 const expression = db.model("expression", {
   name: String,
@@ -62,13 +170,14 @@ const accountBase = db.model("accountBase", {
   status: String, // 1 已使用 0 未使用
   special: String,
   type: String, // 1 用户 2 群聊
-  random: Number // (随机数索引，用于随机查找一条)
+  random: Number // 随机数索引，用于随机查找一条
 })
 
 const initUser = (callback) => {
+  let password = md5('123456')
   let user = new users({
     account: 'LC',
-    password: '123456',
+    password: password,
     avatar: '',
     signature: '@LC官方',
     nickName: 'LC官方',
@@ -112,13 +221,6 @@ const initEmoji = (filePath, objs) => {
         info: filename
       };
       initEmoji(filedir, obj); //递归，如果是文件夹，就继续遍历该文件夹下面的文件
-      // for (let k in obj) {
-      //     let expre = new expression({
-      //         name: k,
-      //         list: obj[k]
-      //     });
-      //     expre.save();
-      // }
     }
   })
 }
@@ -167,5 +269,11 @@ module.exports = {
   initUser,
   initEmoji,
   initAccount,
-  users
+  initGroup,
+  initGroupUser,
+  users,
+  groups,
+  groupUser,
+  accountBase,
+  expression
 }

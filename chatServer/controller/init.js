@@ -1,7 +1,14 @@
-const initModel = require("../model/init") // 初始化数据库表
+const initModel = require("../model/index") // 初始化数据库表
+
 let db = {
     initUser() {
         initModel.initUser()
+    },
+    initGroup() {
+      initModel.initGroup()
+    },
+    initGroupUser() {
+      initModel.initGroupUser()
     },
     initEmoji() { // 初始化表情包
         initModel.initEmoji('./public/expression')
@@ -13,6 +20,8 @@ let db = {
         this.initUser()
         this.initEmoji()
         this.initAccount()
+        this.initGroup()
+        this.initGroupUser()
     }
 }
 

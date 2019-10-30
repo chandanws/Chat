@@ -6,7 +6,7 @@ body,
   height: 100%;
   width: 100%;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -61,16 +61,6 @@ a:hover {
   text-align-last: initial;
 }
 
-input {
-  height: $h-input;
-  width: $w-input;
-  border: .06rem solid $clr-border;
-  border-radius: 5px;
-  font-size: $font-size-input;
-  padding-inline-start: .6rem;
-  color: $clr-gray;
-}
-
 ::-webkit-input-placeholder {
   color: $clr-gray;
   font-size: $font-size-input;
@@ -94,11 +84,8 @@ button {
 }
 
 textarea {
-  border-radius: 4px;
-  border: .06rem solid $clr-border;
-  padding-inline-start: .6rem;
   height: 10rem;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 li {
@@ -108,4 +95,5 @@ li {
 .active {
   color: #169BD5;
   border: none;
+  cursor: pointer;
 }

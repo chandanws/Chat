@@ -3,7 +3,7 @@
  */
 
  const mongoose = require('mongoose')
- mongoose.connect('mongodb://127.0.0.1:27017/chat')
+ mongoose.connect('mongodb://127.0.0.1:27017/Vchat')
  var db = mongoose.connection
   db.on('error', console.error.bind(console, '链接错误：'))
   db.once('open', (callback) => {

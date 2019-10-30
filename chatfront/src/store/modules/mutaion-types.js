@@ -1,0 +1,5 @@
+export const SET_LOGIN = 'SET_LOGIN'
+export const SET_SIGNUP = 'SET_SIGNUP'
+export const SET_CODE = 'SET_CODE'
+export const SET_ID = 'SET_ID'
+export const SET_ACCOUNT = 'SET_ACCOUNT'

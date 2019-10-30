@@ -1,41 +1,13 @@
 import axios from 'axios'
-import config from '../config/index'
-import { Message } from 'element-ui'
-
 import {
-  getToken
-} from './auth'
-
-const $http = axios.create({
-  baseURL: config.baseURL,
-  timeout: 10000,
-  withCredentials: true
-})
-
-// 请求拦截
-$http.interceptors.request.use(
-  config => {
-    if (getToken()) {
-      config.headers.Authorization = getToken()
-    }
-    return config
-  },
-  err => Promise.reject(err)
-)
-
-// 响应拦截
-$http.interceptors.response.use(
-  response => {
-    return response
-  },
-  err => Promise.resolve(err.response)
-)
+  BASE_API
+} from '@/config'
 
 // 检查状态码
-function checkStatus (res) {
+function checkStatus(res) {
   if (!res) {
     return {
-      code: 0,
+      code: -1,
       message: 'Error: 服务器出错',
       data: {}
     }
@@ -44,59 +16,34 @@ function checkStatus (res) {
     return res.data
   }
   return {
-    code: 0,
+    code: -1,
     message: `Error:${res.status} ${res.data.message || '服务器出错！'}`,
     data: res.statusText
   }
 }
 
-// 检查code值
-function checkCode (res) {
-  if (res.code === 0) {
-    Message({
-      message: res.message,
-      type: 'error',
-      duration: 2 * 1000
-    })
-    throw new Error(res.message)
-  }
-  return res
-}
-
 export const get = (url, params = {}) => {
   if (!url) return
-  return $http({
-    method: 'GET',
-    url,
-    params,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  }).then(checkStatus).then(checkCode) // 详情
+  return axios({
+    method: 'get',
+    url: BASE_API + url,
+    params
+  }).then(checkStatus)
 }
 
 export const head = (url, params = {}) => {
   if (!url) return
-  return $http({
-    method: 'HEAD',
-    url,
-    params,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  }).then(checkStatus).then(checkCode)
+  return axios({
+    method: 'head',
+    url: BASE_API + url,
+    params
+  }).then(checkStatus)
 }
 
 export const post = (url, data = {}) => {
-  if (!url) return
-  return $http({
-    method: 'POST',
-    url,
-    data,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  }).then(res => {
-    console.log(res)
-  })
+  return axios({
+    method: 'post',
+    url: BASE_API + url,
+    data
+  }).then(checkStatus)
 }

@@ -17,7 +17,7 @@
     "vchat-regcode": "0.0.3",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -39,6 +39,7 @@
     "normalize.css": "^8.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^1.0.0",
+    "svg-sprite-loader": "^4.1.6",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-loader": "^15.7.1",

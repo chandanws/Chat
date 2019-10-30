@@ -1,13 +1,8 @@
-const db = require('../utils/database')
-
-let expression = db.model("expression", {
-  name: String,
-  info: String,
-  list: Array
-})
+const initModel = require('./init')
+const Expression = initModel.expression
 
 const getExpression = (params, callback) => {
-  expression.find().then(r => {
+  Expression.find().then(r => {
     callback({
       code: 0,
       data: r
